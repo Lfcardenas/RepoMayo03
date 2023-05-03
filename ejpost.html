@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <script>
+        let url='https://jsonplaceholder.typicode.com/posts'; //link de la API
+        fetch(url)
+                .then(response =>response.json())// '=>' es "lambda", permite indicar que se hará con los datos
+                .then(data=>mostrarData(data))
+                .catch(error =>console.log(error))//Atrapa un error si es que ocurriese
+
+                const mostrarData=(data)=>{
+                    console.log(data)
+                    let body=""
+
+                    
+                    for(var i=0; i<data.length;i++){
+                        if (data[i].userId=3){
+                        body+=`<tr>
+                            <td>${data[i].userId}</td>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].title}</td>
+                            <td>${data[i].body}</td>
+                            </tr>                
+                            `                       
+                        }
+                    }
+                document.getElementById('data').innerHTML=body
+                }
+    </script>
+</head>
+
+
+
+<body>
+    <!--mostrar de la api de post cuya url es https://jsonplaceholder.typicode.com/posts ,cuyo user ID sea el numero 3 -->
+    <div class="container">
+
+        <h2>Api de post</h2> <br><br>
+        <table class="table" >
+            <thead> <!--Encabezado de tabla-->
+                <tr>
+                    <th>User Id</th>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Body</th>
+                </tr>
+            </thead>
+            <tbody id="data"><!--Cuerpo de tabla-->
+            </tbody>
+        </table>
+
+    </div>
+
+
+</body>
+</html>
